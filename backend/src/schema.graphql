@@ -1,0 +1,19 @@
+
+# to import all type used that in generated file
+
+# import *  from'./generated/prisma-schema.js'
+
+
+
+
+type Mutation {
+createItem(title:String,description:String,price:Int,image:String,largeImage): Item!
+updateItem(id:ID!,title:String,description:String,price:Int):Item!
+
+
+}
+type Query{
+items:[Item]!
+  item(where: ItemWhereUniqueInput!): Item
+
+}

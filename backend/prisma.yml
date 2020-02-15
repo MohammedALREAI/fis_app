@@ -1,0 +1,9 @@
+endpoint: https://eu1.prisma.sh/mhamadaa1997/sik-fits/dev
+datamodel: datamodel.prisma
+
+generate:
+  - generator: graphql-schema
+    output: ./generated
+hooks:
+  post-deploy:
+      - graphql get-schema -p prisma
