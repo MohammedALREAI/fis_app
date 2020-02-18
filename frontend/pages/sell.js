@@ -1,7 +1,7 @@
 import React from 'react'
 
 import CreatItem from'../components/createItem'
-export default function sell() {
+ const  sell=(pro{ps)=> {
   return (
     <div>
       <CreatItem/>
@@ -9,4 +9,5 @@ export default function sell() {
     </div>
   )
 }
+export default sell;
 

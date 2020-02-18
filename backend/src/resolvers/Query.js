@@ -3,7 +3,8 @@ const query = {
 
 
   items: forwardTo('db'),
-  item: forwardTo('db')
+  item: forwardTo('db'),
+  itemsConnection:forwardTo('db')
 
 
 }

@@ -35,8 +35,23 @@ const mutation = {
 
 
     // -----------   END updateItem---------------------------------
+,
+    // -----------    DeleteItem---------------------------------
 
+  async deleteItem(parent, args, { db }, info) {
 
+    const where = args.id;
+
+    // if the item is found
+    const item = await db.query.item({ where }, `{id,title}`)
+
+    if (item) {
+      return ctx.mutation.deleteItem({ where },info)
+    }
+
+}
+
+      // -----------    End DeleteItem---------------------------------
 
 
 

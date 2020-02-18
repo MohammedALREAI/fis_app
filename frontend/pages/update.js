@@ -1,12 +1,13 @@
 import React from 'react'
 
 import updateItem from'../components/UpdateItem'
-export default function Update() {
+ const  Update=({query})=> {
   return (
     <div>
-      <updateItem/>
+      <updateItem id= {query.id}/>
 
     </div>
   )
 }
 
+export default Update
