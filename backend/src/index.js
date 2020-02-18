@@ -1,23 +1,39 @@
 const cookieParser = require('cookie-parser');
-const jwt = require('jsonwebtoken');
+const { GraphQLServer } = require('graphql-yoga')
 
+const jwt = require('jsonwebtoken');
+const Mutation = require('./resolvers/Mutation');
+const Query = require('./resolvers/Query');
 require('dotenv').config({ path: 'variables.env' });
-const createServer = require('./createServer');
+// const server = require('./createServer');
 const db = require('./db');
-const server = createServer();
+
+const resolvers  = {
+  Mutation,
+  Query
+};
+
+const server = new GraphQLServer({
+    typeDefs: 'src/schema.graphql',
+    resolvers,
+    resolverValidationOptions: {
+      requireResolversForResolveType: false,
+    },
+    context: req => ({ ...req, db }),
+   });
 
 server.express.use(cookieParser());
 
 // decode the JWT so we can get the user Id on each request
-server.express.use((req, res, next) => {
-  const { token } = req.cookies;
-  if (token) {
-    const { userId } = jwt.verify(token, process.env.APP_SECRET);
-    // put the userId onto the req for future requests to access
-    req.userId = userId;
-  }
-  next();
-});
+// server.express.use((req, res, next) => {
+//   const { token } = req.cookies;
+//   if (token) {
+//     const { userId } = jwt.verify(token, process.env.APP_SECRET);
+//     // put the userId onto the req for future requests to access
+//     req.userId = userId;
+//   }
+//   next();
+// });
 
 // 2. Create a middleware that populates the user on each request
 
